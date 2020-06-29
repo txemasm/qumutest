@@ -52,12 +52,14 @@ function setPageData(currentStep) {
 		'3': 'datos_acceso'
 	}
 	if (currentStep) {
+		 return {
 			'origin': undefined, 
 			'filter': undefined, 
 			'isTagged': undefined, 
 			'section': 'usuario', 
 			'pageType': 'registro', 
 			'pageTitle': pageTitle[currentStep]
+		 }
 	} else {	
 		return {
 			'origin': undefined, 
