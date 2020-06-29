@@ -1,11 +1,11 @@
-function pushPageviewToDataLayer() {
+function pushPageviewToDataLayer(currentStep) {
   window.dataLayer.push({
     event: 'imPageview',
     context: setContextData(),
     user: setUserData(), 
-	  page: setPageData(), 
-	  deposit: setDepositData(), 
-	  ticket: setTicketData(),
-	  ecommerce: setEcommerce()
+    page: setPageData(currentStep), 
+    deposit: setDepositData(), 
+    ticket: setTicketData(),
+    ecommerce: setEcommerce()
     });
  }
