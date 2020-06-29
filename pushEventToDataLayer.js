@@ -4,9 +4,9 @@ function pushEventToDataLayer() {
       	eventData: setEventData(),
         context: setContextData(),
     	user: setUserData(), 
-		page: setPageData(), 
-		deposit: setDepositData(), 
-		ticket: setTicketData(),
-		ecommerce: setEcommerce()
+	page: setPageData(), 
+	deposit: setDepositData(), 
+	ticket: setTicketData(),
+	ecommerce: setEcommerce()
     });
  }
