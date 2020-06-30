@@ -1,13 +1,17 @@
+var currentStep = document.querySelector('.stepwise-registration').getAttribute('data-current-step');
+
 function registrationTagging() {
-    var currentStep = document.querySelector('.stepwise-registration').getAttribute('data-current-step');
-    pushPageviewToDataLayer(currentStep);
+    var section = batTag.SECTION.USUARIO;
+    var pageType = batTag.PAGETYPE.REGISTRO;
+    var pageTitle = batTag.PAGETITLE[currentStep];
+
+    batTag.sendPageview(section, pageType, pageTitle);
 }
 
 function registrationEventTagging() {
-    var currentStep = document.querySelector('.stepwise-registration').getAttribute('data-current-step');
     var nextStepButton = document.querySelectorAll("input[data-uat='registration-next-button']");
     clickerFn = function() {
-        pushEventToDataLayer(currentStep);
+        batTag.sendAnalyticsEvent('registro_paso' + currentStep, 'siguiente', 'paso_' + currentStep);
     }
     for (var i=0; i < nextStepButton.length; i++) {
         nextStepButton.item(i).onclick = clickerFn;

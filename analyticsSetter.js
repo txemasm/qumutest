@@ -1,4 +1,3 @@
-
 (function (window) {
 
   function initTracking() {
@@ -36,14 +35,12 @@
         'firstDeposit': undefined
       }
     }
-
     function _setTicketData() {
       return {
         'betType': undefined,
         'amount': undefined
       }
     }
-
     function _setEcommerce() {
       return undefined;
     }
@@ -117,10 +114,10 @@
       });
     }
 
-    function sendAnalyticsEvent() {
+    function sendAnalyticsEvent(category, action, label) {
       window.dataLayer.push({
         'event': 'imAnalyticsEvent',
-        'eventData': _setEventData(),
+        'eventData': _setEventData(category, action, label),
         'context': _setContextData(),
         'user': _setUserData(),
         'page': _setPageData(),
@@ -177,14 +174,3 @@
   }
 
 })(window);
-
-
-
-
-
-
-
-
-
-
-
