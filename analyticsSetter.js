@@ -1,6 +1,21 @@
 (function (window) {
 
   function initTracking() {
+    var PAGETITLES = {
+      DATOS_PERSONALES: 'datos_personales',
+      DATOS_CONTACTO: 'datos_contacto',
+      DATOS_ACCESO: 'datos_acceso',
+      VERIFICAR_IDENTIDAD: 'verificar_identidad',
+      CONFIRMACION: 'confirmacion'
+    };
+    var PAGETYPES = {
+      REGISTRO: 'registro'
+    };
+    var SECTIONS = {
+      USUARIO: 'usuario'
+    }
+
+
     function _getDeviceType() {
       return window.DEVICE_TYPE === 'IsDesktop' ? 'web' : 'mobile';
     }
@@ -52,16 +67,15 @@
 
     function _getUserStatus(userInfo) {
       var userInfo = userInfo || window.UserInfo.current || {};
-      var userStatus = [];
-      if (userInfo.IsAccountVerified === 1) {
-        userStatus.push('verificado');
-      } else {
-        userStatus.push('no_verificado');
-      }
       if (userInfo.IsSelfExcluded === 1) {
-        userStatus.push('autoexcluido');
+        return 'autoexcluido';
       }
-      return userStatus.join('|');
+      if (userInfo.IsAccountVerified === 1) {
+        return 'verificado';
+      } else {
+        return 'no_verificado';
+      }
+
     }
 
     function _getUserLogged(userInfo) {
@@ -139,32 +153,34 @@
       });
     }
 
-    function getPageTitles() {
-      return {
-        DATOS_PERSONALES: 'datos_personales',
-        DATOS_CONTACTO: 'datos_contacto',
-        DATOS_ACCESO: 'datos_acceso'
-      }
-    }
-    function getPageTypes() {
-      return {
-        REGISTRO: 'registro'
-      }
-    }
-    function getPageSections() {
-      return {
-        USUARIO: 'usuario'
-      }
-    }
+    function registrationPageview(currentStep) {
+      debugger;
+      var registrationPageTitle = {
+        '1': PAGETITLES.DATOS_PERSONALES,
+        '2': PAGETITLES.DATOS_CONTACTO,
+        '3': PAGETITLES.DATOS_ACCESO
+      };
+      var section = SECTIONS.USUARIO;
+      var pageType = PAGETYPES.REGISTRO;
+      var pageTitle = registrationPageTitle[currentStep];
 
+      sendPageview(section, pageType, pageTitle);
+    }
     var commonTracking = {
       sendPageview: sendPageview,
       sendAnalyticsEvent: sendAnalyticsEvent,
       sendEcommercePageview: sendEcommercePageview,
       sendEcommerceEvent: sendEcommerceEvent,
-      PAGETITLE: getPageTitles(),
-      PAGETYPE: getPageTypes(),
-      SECTION: getPageSections()
+      sendRegistrationPageview: registrationPageview,
+      PAGETITLE: PAGETITLES,
+      PAGETYPE: PAGETYPES,
+      SECTION: SECTIONS,
+      CONSTANTS: {
+        PAGETITLE: PAGETITLES,
+        PAGETYPE: PAGETYPES,
+        SECTION: SECTIONS
+      },
+      batVersion: '1.0.0'
     }
     return commonTracking;
   }
