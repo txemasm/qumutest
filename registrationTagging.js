@@ -1,9 +1,15 @@
 var currentStep = document.querySelector('.stepwise-registration').getAttribute('data-current-step');
 
-function registrationTagging() {
+function registrationPageviewTagging() {
+    var registrationPageTitle = {
+        '1': 'DATOS_PERSONALES',
+        '2': 'DATOS_CONTACTO',
+        '3': 'DATOS_ACCESO'
+    }
+    
     var section = batTag.SECTION.USUARIO;
     var pageType = batTag.PAGETYPE.REGISTRO;
-    var pageTitle = batTag.PAGETITLE[currentStep];
+    var pageTitle = batTag.PAGETITLE[registrationPageTitle[currentStep]];
 
     batTag.sendPageview(section, pageType, pageTitle);
 }
