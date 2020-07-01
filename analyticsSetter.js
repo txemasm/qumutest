@@ -13,8 +13,36 @@
     };
     var SECTIONS = {
       USUARIO: 'usuario'
-    }
+    };
+    var CATEGORIES = {
+      REGISTRO_PASO: 'registro_paso',
+      REGISTRO_PASO1: 'registro_paso1',
+      REGISTRO_PASO2: 'registro_paso2',
+      REGISTRO_PASO3: 'registro_paso3'
+    };
+    var ACTIONS = {
+      ATRAS: 'atras',
+      SIGUIENTE: 'siguiente',
+      ERROR_REGISTRO: 'error_registro',
+      ERROR_SERVIDOR: 'error_servidor',
+      REGISTRATE: 'registrate'
+    };
+    var LABELS = {
+      PASO: 'paso',
+      PASO_1: 'paso_1',
+      PASO_2: 'paso_2',
+      PASO_3: 'paso_3'
+    };
 
+    //Se sobrescribe la función para añadir nuestra llamada de analítica. 
+    RegistrationGoogleAnalyticsHelper.prototype.registrationError = function (n, t) {
+      timeControl && timeControl.initialized ? this.processRegistrationEvent(RegistrationGoogleAnalyticsHelperConsts.RegErrorEvent, n) : window.RegistrationGoogleAnalyticsQueue.push({
+        eventName: RegistrationGoogleAnalyticsHelperConsts.RegErrorEvent,
+        stepIndex: n,
+        errorKey: t
+      })
+      sendErrorFormRegister(n, t)
+    }
 
     function _getDeviceType() {
       return window.DEVICE_TYPE === 'IsDesktop' ? 'web' : 'mobile';
@@ -153,8 +181,7 @@
       });
     }
 
-    function registrationPageview(currentStep) {
-      debugger;
+    function sendRegistrationPageview(currentStep) {
       var registrationPageTitle = {
         '1': PAGETITLES.DATOS_PERSONALES,
         '2': PAGETITLES.DATOS_CONTACTO,
@@ -166,19 +193,30 @@
 
       sendPageview(section, pageType, pageTitle);
     }
+
+    function sendErrorFormRegister(step, errorKey) {
+      var category = CATEGORIES.REGISTRO_PASO + step;
+      var action = ACTIONS.ERROR_REGISTRO;
+      var label = errorKey;
+      sendAnalyticsEvent(category, action, label);
+    }
     var commonTracking = {
       sendPageview: sendPageview,
       sendAnalyticsEvent: sendAnalyticsEvent,
       sendEcommercePageview: sendEcommercePageview,
       sendEcommerceEvent: sendEcommerceEvent,
-      sendRegistrationPageview: registrationPageview,
+      sendRegistrationPageview: sendRegistrationPageview,
+      sendErrorFormRegister: sendErrorFormRegister,
       PAGETITLE: PAGETITLES,
       PAGETYPE: PAGETYPES,
       SECTION: SECTIONS,
       CONSTANTS: {
         PAGETITLE: PAGETITLES,
         PAGETYPE: PAGETYPES,
-        SECTION: SECTIONS
+        SECTION: SECTIONS,
+        ACTION: ACTIONS,
+        CATEGORY: CATEGORIES,
+        LABEL: LABELS
       },
       batVersion: '1.0.0'
     }
