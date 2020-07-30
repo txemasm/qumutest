@@ -28,7 +28,10 @@
 
       api.bind('pause', function() {
         action = 'qumu media pause';
-        pushToDataLayer(action, label);
+        var timeToFinish = videoInfo.duration - videoInfo.IMCurrentTime;
+        if (timeToFinish > 500) {
+          pushToDataLayer(action, label);
+        }
       });
 
       api.bind('ended', function() {
