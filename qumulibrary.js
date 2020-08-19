@@ -204,7 +204,7 @@
   }
   function consoleDebugger(message) {
     if(sessionStorage.getItem('imDebug')){
-        console.log('%c 🎥 Qumu: ', 'background: #0077C8; color: #FFFFFF; font-weight: bold; font-size: 12px; padding: 2px; vertical-align: middle', message);
+        console.log('%c 🎥 Qumu ', 'background: #0077C8; color: #FFFFFF; font-weight: bold; font-size: 12px; padding: 2px; vertical-align: middle', message);
     }
   }
   if (typeof (window.batQumuTracking) === 'undefined') {
