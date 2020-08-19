@@ -1,6 +1,4 @@
 (function () {
-  var qumuTimer = setInterval(qumuTagging, 500);
-  var tryCounter = 0;
   function qumuTagging() {
       if(window.jQuery) {
           clearInterval(qumuTimer);
@@ -203,10 +201,17 @@
               consoleDebugger('stop qumu tagging');
           }
       }
-      function consoleDebugger(message) {
-          if(sessionStorage.getItem('imDebug')){
-              console.log('%c 🎥 Qumu: ', 'background: #0077C8; color: #FFFFFF; font-weight: bold; font-size: 12px; padding: 2px; vertical-align: middle', message);
-          }
-      }
+  }
+  function consoleDebugger(message) {
+    if(sessionStorage.getItem('imDebug')){
+        console.log('%c 🎥 Qumu: ', 'background: #0077C8; color: #FFFFFF; font-weight: bold; font-size: 12px; padding: 2px; vertical-align: middle', message);
+    }
+  }
+  if (typeof (window.batQumuTracking) === 'undefined') {
+    var qumuTimer = setInterval(qumuTagging, 500);
+    var tryCounter = 0
+    window.batQumuTracking = true;
+  } else {
+    consoleDebugger('tracking library loaded');
   }
 })();
