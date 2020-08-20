@@ -67,7 +67,7 @@
         'filter': undefined,
         'isTagged': undefined,
         'section': section,
-        'pageType': pageType,
+        'type': pageType,
         'pageTitle': pageTitle
       }
     }
