@@ -159,7 +159,7 @@
     function sendAnalyticsEvent(category, action, label) {
       window.dataLayer.push({
         'event': 'imAnalyticsEvent',
-        'eventData': _setEventData(category, action, label),
+        'event_data': _setEventData(category, action, label),
         'context': _setContextData(),
         'user': _setUserData(),
         'page': _setPageData(),
@@ -171,7 +171,7 @@
     function sendEcommerceEvent() {
       window.dataLayer.push({
         'event': 'imAnalyticsEvent',
-        'eventData': _setEventData(),
+        'event_data': _setEventData(),
         'context': _setContextData(),
         'user': _setUserData(),
         'page': _setPageData(),
