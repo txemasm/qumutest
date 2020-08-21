@@ -162,7 +162,6 @@
         'event_data': _setEventData(category, action, label),
         'context': _setContextData(),
         'user': _setUserData(),
-        'page': _setPageData(),
         'deposit': _setDepositData(),
         'ticket': _setTicketData(),
         'ecommerce': undefined
