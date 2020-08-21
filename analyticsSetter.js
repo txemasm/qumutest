@@ -35,14 +35,20 @@
     };
 
     //Se sobrescribe la función para añadir nuestra llamada de analítica. 
-    RegistrationGoogleAnalyticsHelper.prototype.registrationError = function (n, t) {
-      timeControl && timeControl.initialized ? this.processRegistrationEvent(RegistrationGoogleAnalyticsHelperConsts.RegErrorEvent, n) : window.RegistrationGoogleAnalyticsQueue.push({
-        eventName: RegistrationGoogleAnalyticsHelperConsts.RegErrorEvent,
-        stepIndex: n,
-        errorKey: t
-      })
-      sendErrorFormRegister(n, t)
+    try {
+      RegistrationGoogleAnalyticsHelper.prototype.registrationError = function (n, t) {
+        timeControl && timeControl.initialized ? this.processRegistrationEvent(RegistrationGoogleAnalyticsHelperConsts.RegErrorEvent, n) : window.RegistrationGoogleAnalyticsQueue.push({
+          eventName: RegistrationGoogleAnalyticsHelperConsts.RegErrorEvent,
+          stepIndex: n,
+          errorKey: t
+        })
+        sendErrorFormRegister(n, t)
+      }
     }
+    catch(e) {
+      //console.log("No está definida");
+    }
+
 
     function _getDeviceType() {
       return window.DEVICE_TYPE === 'IsDesktop' ? 'web' : 'mobile';
