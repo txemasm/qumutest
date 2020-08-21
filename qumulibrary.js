@@ -80,7 +80,7 @@
                       var time = parseInt(currentTime);
                       videoInfo.currentTime = currentTime;
                       var percents = videos[videoInfo.guid].percents;
-                      if (videoInfo.vod != true) {
+                      if (!videoInfo.vod) {
                           if (percents.quarter.hit && (time > percents.quarter.value && time < percents.half.value)) {
                               percents.quarter.hit = false;
                               action = getAction('timeupdate', '25%');
