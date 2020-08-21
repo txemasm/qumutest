@@ -80,7 +80,7 @@
                       var time = parseInt(currentTime);
                       videoInfo.currentTime = currentTime;
                       var percents = videos[videoInfo.guid].percents;
-                      if (videoInfo.isLiveStream != true) {
+                      if (videoInfo.vod != true) {
                           if (percents.quarter.hit && (time > percents.quarter.value && time < percents.half.value)) {
                               percents.quarter.hit = false;
                               action = getAction('timeupdate', '25%');
@@ -122,9 +122,8 @@
           function initVideosQumu(video) {
               videos[video.guid] = video;
               videos[video.guid].percents = calculatePercentsVideo(video);
-              videos[video.guid].isLiveStream = isLiveStream();
               var formattedTime = formatTime(videoInfo.duration);
-              videos[video.guid].label = isLiveStream() ? video.guid + ' | ' + video.title : video.guid + ' | ' + video.title + ' | ' + formattedTime;
+              videos[video.guid].label = videos[video.guid].vod ? video.guid + ' | ' + video.title : video.guid + ' | ' + video.title + ' | ' + formattedTime;
           }
 
           function calculatePercentsVideo(video) {
@@ -165,13 +164,6 @@
               };
               return ACTIONS.qumu + ' ' + names[action];
           };
-
-          function isLiveStream() {
-              if (jQuery("div [guid=" + videoInfo.guid + "]").closest("#live-stream").length > 0) {
-                  return true;
-              }
-              return false;
-          }
 
           function formatTime(ms) {
               var seconds = ms / 1000;
