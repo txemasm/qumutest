@@ -9,7 +9,8 @@
       CONFIRMACION: 'confirmacion'
     };
     var PAGETYPES = {
-      REGISTRO: 'registro'
+      REGISTRO: 'registro',
+      MENU_DEPOSITAR: 'menu/depositar'
     };
     var SECTIONS = {
       USUARIO: 'usuario'
@@ -199,6 +200,14 @@
       sendPageview(section, pageType, pageTitle);
     }
 
+    function sendDepositPage(){
+      if(window.UserInfo.current) {
+        var section = SECTIONS.USUARIO;
+        var pageType = PAGETYPES.MENU_DEPOSITAR;
+        sendPageview(section, pageType);
+      }
+    }
+
     function sendErrorFormRegister(step, errorKey) {
       var category = CATEGORIES.REGISTRO_PASO + step;
       var action = ACTIONS.ERROR_REGISTRO;
@@ -212,6 +221,7 @@
       sendEcommerceEvent: sendEcommerceEvent,
       sendRegistrationPageview: sendRegistrationPageview,
       sendErrorFormRegister: sendErrorFormRegister,
+      sendDepositPage:sendDepositPage,
       PAGETITLE: PAGETITLES,
       PAGETYPE: PAGETYPES,
       SECTION: SECTIONS,
