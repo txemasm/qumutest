@@ -103,7 +103,7 @@
                           }
                       } else {
                           var remainder = time % 60000;
-                          if (time > 500 && remainder < 150) {
+                          if (time > 500 && remainder < 180) {
                               var formattedTime = formatTime(videoInfo.currentTime);
                               action = getAction('unload', formattedTime);
                               pushToDataLayer(action, label);
