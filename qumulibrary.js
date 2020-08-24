@@ -43,7 +43,7 @@
                       getCurrentVideo();
                       action = getAction('play');
                       consoleDebugger('play' + DEBUGGER.bind + videoInfo.guid);
-                      if (videoInfo.currentTime > 500) {
+                      if (videoInfo.currentTime > 500 || !videoInfo.vod) {
                           pushToDataLayer(action, label);
                           consoleDebugger('play' + DEBUGGER.push + videoInfo.guid);
                       }
@@ -54,7 +54,7 @@
                       action = getAction('pause');
                       consoleDebugger('pause' + DEBUGGER.bind + videoInfo.guid);
                       var timeToFinish = videoInfo.duration - videoInfo.currentTime;
-                      if (timeToFinish > 500) {
+                      if (timeToFinish > 500 || !videoInfo.vod) {
                           pushToDataLayer(action, label);
                           consoleDebugger('pause' + DEBUGGER.push + videoInfo.guid);
                       }
