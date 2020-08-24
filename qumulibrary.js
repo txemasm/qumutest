@@ -101,11 +101,11 @@
                           }
                       } else {
                           var remainder = time % 60000;
-                          if (time > 500 && remainder < 250) {
+                          if (time > 500 && remainder < 150) {
                               var formattedTime = formatTime(videoInfo.currentTime);
                               action = getAction('unload', formattedTime);
                               pushToDataLayer(action, label);
-                              consoleDebugger('75%' + DEBUGGER.push + videoInfo.guid);
+                              consoleDebugger('minutes watching' + DEBUGGER.push + videoInfo.guid);
                           }
                       }
                   });
