@@ -16,6 +16,7 @@
       USUARIO: 'usuario'
     };
     var CATEGORIES = {
+      HEADER: 'header',
       REGISTRO_PASO: 'registro_paso',
       REGISTRO_PASO1: 'registro_paso1',
       REGISTRO_PASO2: 'registro_paso2',
@@ -26,7 +27,11 @@
       SIGUIENTE: 'siguiente',
       ERROR_REGISTRO: 'error_registro',
       ERROR_SERVIDOR: 'error_servidor',
-      REGISTRATE: 'registrate'
+      REGISTRATE: 'registrate',
+      IR_REGISTRO: 'ir_registro',
+      IR_LOGIN: 'ir_login',
+      IR_DEPOSITO: 'ir_deposito'
+
     };
     var LABELS = {
       PASO: 'paso',
@@ -46,9 +51,45 @@
         sendErrorFormRegister(n, t)
       }
     }
-    catch(e) {
+    catch (e) {
       //console.log("No está definida");
     }
+
+    function _addHeaderEventListeners() {
+      /*JOIN NOW BUTTON*/
+      var joinNowHeaderButton = document.getElementsByClassName('page-header-join-button')[0];
+      if (joinNowHeaderButton) {
+        joinNowHeaderButton.addEventListener('click', function (e) {
+          var category = CATEGORIES.HEADER;
+          var action = ACTIONS.IR_REGISTRO;
+          sendAnalyticsEvent(category, action);
+        });
+      }
+
+
+      /*LOGIN BUTTON*/
+      var loginHeaderButton = document.getElementsByClassName('page-header-login-button')[0];
+      if (loginHeaderButton) {
+        loginHeaderButton.addEventListener('click', function (e) {
+          var category = CATEGORIES.HEADER;
+          var action = ACTIONS.IR_LOGIN;
+          sendAnalyticsEvent(category, action);
+        });
+      }
+
+
+      /*DEPOSIT BUTTON*/
+      var depositHeaderButton = document.getElementsByClassName('page-header-deposit-button')[0];
+      if (depositHeaderButton) {
+        depositHeaderButton.addEventListener('click', function (e) {
+          var category = CATEGORIES.HEADER;
+          var action = ACTIONS.IR_DEPOSITO;
+          sendAnalyticsEvent(category, action);
+        });
+      }
+    }
+    _addHeaderEventListeners();
+
 
 
     function _getDeviceType() {
@@ -201,8 +242,8 @@
       sendPageview(section, pageType, pageTitle);
     }
 
-    function sendDepositPage(){
-      if(window.UserInfo.current) {
+    function sendDepositPage() {
+      if (window.UserInfo.current) {
         var section = SECTIONS.USUARIO;
         var pageType = PAGETYPES.MENU_DEPOSITAR;
         sendPageview(section, pageType);
@@ -222,7 +263,7 @@
       sendEcommerceEvent: sendEcommerceEvent,
       sendRegistrationPageview: sendRegistrationPageview,
       sendErrorFormRegister: sendErrorFormRegister,
-      sendDepositPage:sendDepositPage,
+      sendDepositPage: sendDepositPage,
       PAGETITLE: PAGETITLES,
       PAGETYPE: PAGETYPES,
       SECTION: SECTIONS,
