@@ -191,7 +191,8 @@
       var registrationPageTitle = {
         '1': PAGETITLES.DATOS_PERSONALES,
         '2': PAGETITLES.DATOS_CONTACTO,
-        '3': PAGETITLES.DATOS_ACCESO
+        '3': PAGETITLES.DATOS_ACCESO,
+        '4': PAGETITLES.VERIFICAR_IDENTIDAD
       };
       var section = SECTIONS.USUARIO;
       var pageType = PAGETYPES.REGISTRO;
