@@ -80,7 +80,7 @@
                       var time = parseInt(currentTime);
                       videoInfo.currentTime = currentTime;
                       var percents = videos[videoInfo.guid].percents;
-                      if (!videoInfo.vod) {
+                      if (videoInfo.vod) {
                           if (percents.quarter.hit && (time > percents.quarter.value && time < percents.half.value)) {
                               percents.quarter.hit = false;
                               action = getAction('timeupdate', '25%');
@@ -123,7 +123,7 @@
               videos[video.guid] = video;
               videos[video.guid].percents = calculatePercentsVideo(video);
               var formattedTime = formatTime(videoInfo.duration);
-              videos[video.guid].label = videos[video.guid].vod ? video.guid + ' | ' + video.title : video.guid + ' | ' + video.title + ' | ' + formattedTime;
+              videos[video.guid].label = videos[video.guid].vod ? video.guid + ' | ' + video.title + ' | ' + formattedTime : video.guid + ' | ' + video.title;
           }
 
           function calculatePercentsVideo(video) {
