@@ -40,7 +40,7 @@
       PASO_3: 'paso_3'
     };
 
-    //Se sobrescribe la función para añadir nuestra llamada de analítica. 
+    //Se sobrescriben las funciones para adaptarlas a nuestra analítica. 
     try {
       RegistrationGoogleAnalyticsHelper.prototype.registrationError = function (n, t) {
         timeControl && timeControl.initialized ? this.processRegistrationEvent(RegistrationGoogleAnalyticsHelperConsts.RegErrorEvent, n) : window.RegistrationGoogleAnalyticsQueue.push({
@@ -50,11 +50,54 @@
         })
         sendErrorFormRegister(n, t)
       }
+      window.GoogleAnalyticsHelper = function () {
+        function i(n) {
+          return n + " Step Form"
+        }
+        function r(i, r) {
+          t(i, r, n.Loaded)
+        }
+        function u(i, r) {
+          t(i, r, n.Complete)
+        }
+        function f(i) {
+          t(i, i, n.Verified)
+        }
+        function t(n, t, r) {
+          console.log('length of steps: ' + n); //steps
+          console.log('value of current step: ' + t);
+          console.log('value of type: ' + r);
+          var u = i(n);
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "registrationStep" + r,
+            eventCategory: "Registration",
+            eventAction: 'step_' + t,
+            eventLabel: r,
+            eventValue: "" + t,
+            stepsLength: n
+          })
+        }
+        var n = {
+          Loaded: "Loaded",
+          Complete: "Complete",
+          Verified: "Verified"
+        };
+        return window.dataLayer = window.dataLayer || [],
+        {
+          sendStepLoadedEvent: r,
+          sendStepCompletedEvent: u,
+          sendStepVerifiedEvent: f,
+          overwrited: true
+        }
+      }();
+  
     }
     catch (e) {
       //console.log("No está definida");
     }
 
+   
     function _addHeaderEventListeners() {
       /*JOIN NOW BUTTON*/
       var joinNowHeaderButton = document.getElementsByClassName('page-header-join-button')[0];
