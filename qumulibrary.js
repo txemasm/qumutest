@@ -37,16 +37,18 @@
                       action = getAction('load');
                       pushToDataLayer(action, label);
                       consoleDebugger('load' + DEBUGGER.bind_push + videoInfo.guid);
+                      videos[videoInfo.guid].mediaBegin = true;
                   });
 
                   api.bind('play', function () {
                       getCurrentVideo();
                       action = getAction('play');
                       consoleDebugger('play' + DEBUGGER.bind + videoInfo.guid);
-                      if (videoInfo.currentTime > 500 || !videoInfo.vod) {
+                      if (!videoInfo.mediaBegin) {
                           pushToDataLayer(action, label);
                           consoleDebugger('play' + DEBUGGER.push + videoInfo.guid);
                       }
+                      videos[videoInfo.guid].mediaBegin = false;
                   });
 
                   api.bind('pause', function () {
