@@ -103,9 +103,9 @@
       var joinNowHeaderButton = document.getElementsByClassName('page-header-join-button')[0];
       if (joinNowHeaderButton) {
         joinNowHeaderButton.addEventListener('click', function (e) {
-          var category = CATEGORIES.HEADER;
-          var action = ACTIONS.IR_REGISTRO;
-          sendAnalyticsEvent(category, action);
+          var category = batTag.CONSTANTS.CATEGORY.HEADER;
+          var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
+          batTag.sendAnalyticsEvent(category, action);
         });
       }
 
@@ -114,9 +114,9 @@
       var loginHeaderButton = document.getElementsByClassName('page-header-login-button')[0];
       if (loginHeaderButton) {
         loginHeaderButton.addEventListener('click', function (e) {
-          var category = CATEGORIES.HEADER;
-          var action = ACTIONS.IR_LOGIN;
-          sendAnalyticsEvent(category, action);
+          var category = batTag.CONSTANTS.CATEGORY.HEADER;
+          var action = batTag.CONSTANTS.ACTION.IR_LOGIN;
+          batTag.sendAnalyticsEvent(category, action);
         });
       }
 
@@ -125,11 +125,11 @@
       var depositHeaderButton = document.getElementsByClassName('page-header-deposit-button')[0];
       if (depositHeaderButton) {
         depositHeaderButton.addEventListener('click', function (e) {
-          var category = CATEGORIES.HEADER;
-          var action = ACTIONS.IR_DEPOSITO;
-          sendAnalyticsEvent(category, action);
+          var category = batTag.CONSTANTS.CATEGORY.HEADER;
+          var action = batTag.CONSTANTS.ACTION.IR_DEPOSITO;
+          batTag.sendAnalyticsEvent(category, action);
         });
-      }
+      } 
     }
     _addHeaderEventListeners();
 
