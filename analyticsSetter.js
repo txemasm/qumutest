@@ -100,9 +100,18 @@
    
     function _addHeaderEventListeners() {
       /*JOIN NOW BUTTON*/
-      var joinNowHeaderButton = document.getElementsByClassName('page-header-join-button')[0];
+      var joinNowHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right1");
       if (joinNowHeaderButton) {
         joinNowHeaderButton.addEventListener('click', function (e) {
+          var category = batTag.CONSTANTS.CATEGORY.HEADER;
+          var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
+          batTag.sendAnalyticsEvent(category, action);
+        });
+      }
+      //Mobile
+      var joinNowHeaderButtonMobile = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right5");
+      if (joinNowHeaderButtonMobile) {
+        joinNowHeaderButtonMobile.addEventListener('click', function (e) {
           var category = batTag.CONSTANTS.CATEGORY.HEADER;
           var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
           batTag.sendAnalyticsEvent(category, action);
@@ -111,7 +120,7 @@
 
 
       /*LOGIN BUTTON*/
-      var loginHeaderButton = document.getElementsByClassName('page-header-login-button')[0];
+      var loginHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right2");
       if (loginHeaderButton) {
         loginHeaderButton.addEventListener('click', function (e) {
           var category = batTag.CONSTANTS.CATEGORY.HEADER;
@@ -119,7 +128,15 @@
           batTag.sendAnalyticsEvent(category, action);
         });
       }
-
+      //Mobile
+      var loginHeaderButtonMobile = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
+      if (loginHeaderButtonMobile) {
+        loginHeaderButtonMobile.addEventListener('click', function (e) {
+          var category = batTag.CONSTANTS.CATEGORY.HEADER;
+          var action = batTag.CONSTANTS.ACTION.IR_LOGIN;
+          batTag.sendAnalyticsEvent(category, action);
+        });
+      }
 
       /*DEPOSIT BUTTON*/
       var depositHeaderButton = document.getElementsByClassName('page-header-deposit-button')[0];
@@ -130,6 +147,7 @@
           batTag.sendAnalyticsEvent(category, action);
         });
       } 
+    }
     }
     _addHeaderEventListeners();
 
