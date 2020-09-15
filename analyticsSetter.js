@@ -106,7 +106,7 @@
         var joinNowHeaderButton, loginHeaderButton, listenerAction;
         if (_getDeviceType() === 'mobile') {
           joinNowHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right5");
-          loginHeaderButtonMobile = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
+          loginHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
           listenerAction = 'touchend';
         } else {
           joinNowHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right1");
