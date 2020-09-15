@@ -103,7 +103,7 @@
       var headerId = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020") || document.querySelector("#hr-mid-Top_ResponsiveHeader_19160");
       if (headerId) {
         clearInterval(checkHeader);
-        var joinNowHeaderButton, loginHeaderButtonMobile, listenerAction;
+        var joinNowHeaderButton, loginHeaderButton, listenerAction;
         if (_getDeviceType() === 'mobile') {
           joinNowHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right5");
           loginHeaderButtonMobile = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
