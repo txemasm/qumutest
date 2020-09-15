@@ -102,39 +102,29 @@
     function _addHeaderEventListeners() {
       if (document.querySelector("#hr-mid-Top_ResponsiveHeader_16020")) {
         clearInterval(checkHeader);
-        /*JOIN NOW BUTTON*/
-        var joinNowHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right1");
-        if (joinNowHeaderButton) {
-          joinNowHeaderButton.addEventListener('mouseup', function (e) {
-            var category = batTag.CONSTANTS.CATEGORY.HEADER;
-            var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
-            batTag.sendAnalyticsEvent(category, action);
-          });
-        }
-        //Mobile
-        var joinNowHeaderButtonMobile = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right5");
-        if (joinNowHeaderButtonMobile) {
-          joinNowHeaderButtonMobile.addEventListener('mouseup', function (e) {
-            var category = batTag.CONSTANTS.CATEGORY.HEADER;
-            var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
-            batTag.sendAnalyticsEvent(category, action);
-          });
+        var joinNowHeaderButton, loginHeaderButtonMobile, listenerAction;
+        if (window.DEVICE_TYPE === 'mobile') {
+          joinNowHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right5");
+          loginHeaderButtonMobile = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
+          listenerAction = 'mouseup touchend';
+        } else {
+          joinNowHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right1");
+          loginHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right2");
+          listenerAction = 'mouseup';
         }
 
+        /*JOIN NOW BUTTON*/
+        if (joinNowHeaderButton) {
+          joinNowHeaderButton.addEventListener(listenerAction, function (e) {
+            var category = batTag.CONSTANTS.CATEGORY.HEADER;
+            var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
+            batTag.sendAnalyticsEvent(category, action);
+          });
+        }
 
         /*LOGIN BUTTON*/
-        var loginHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right2");
         if (loginHeaderButton) {
-          loginHeaderButton.addEventListener('mouseup', function (e) {
-            var category = batTag.CONSTANTS.CATEGORY.HEADER;
-            var action = batTag.CONSTANTS.ACTION.IR_LOGIN;
-            batTag.sendAnalyticsEvent(category, action);
-          });
-        }
-        //Mobile
-        var loginHeaderButtonMobile = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
-        if (loginHeaderButtonMobile) {
-          loginHeaderButtonMobile.addEventListener('mouseup', function (e) {
+          loginHeaderButton.addEventListener(listenerAction, function (e) {
             var category = batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_LOGIN;
             batTag.sendAnalyticsEvent(category, action);
@@ -144,7 +134,7 @@
         /*DEPOSIT BUTTON*/
         var depositHeaderButton = document.getElementsByClassName('page-header-deposit-button')[0];
         if (depositHeaderButton) {
-          depositHeaderButton.addEventListener('mouseup', function (e) {
+          depositHeaderButton.addEventListener(listenerAction, function (e) {
             var category = batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_DEPOSITO;
             batTag.sendAnalyticsEvent(category, action);
@@ -153,9 +143,6 @@
       }
   }
   var checkHeader = setInterval(_addHeaderEventListeners, 1000);
-
-
-
 
   function _getDeviceType() {
     return window.DEVICE_TYPE === 'IsDesktop' ? 'web' : 'mobile';
