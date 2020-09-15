@@ -104,7 +104,7 @@
         /*JOIN NOW BUTTON*/
         var joinNowHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right1");
         if (joinNowHeaderButton) {
-          joinNowHeaderButton.addEventListener('click', function (e) {
+          joinNowHeaderButton.addEventListener('mouseup', function (e) {
             var category = batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
             batTag.sendAnalyticsEvent(category, action);
@@ -113,7 +113,7 @@
         //Mobile
         var joinNowHeaderButtonMobile = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right5");
         if (joinNowHeaderButtonMobile) {
-          joinNowHeaderButtonMobile.addEventListener('click', function (e) {
+          joinNowHeaderButtonMobile.addEventListener('mouseup', function (e) {
             var category = batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
             batTag.sendAnalyticsEvent(category, action);
@@ -124,7 +124,7 @@
         /*LOGIN BUTTON*/
         var loginHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right2");
         if (loginHeaderButton) {
-          loginHeaderButton.addEventListener('click', function (e) {
+          loginHeaderButton.addEventListener('mouseup', function (e) {
             var category = batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_LOGIN;
             batTag.sendAnalyticsEvent(category, action);
@@ -133,7 +133,7 @@
         //Mobile
         var loginHeaderButtonMobile = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
         if (loginHeaderButtonMobile) {
-          loginHeaderButtonMobile.addEventListener('click', function (e) {
+          loginHeaderButtonMobile.addEventListener('mouseup', function (e) {
             var category = batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_LOGIN;
             batTag.sendAnalyticsEvent(category, action);
@@ -143,7 +143,7 @@
         /*DEPOSIT BUTTON*/
         var depositHeaderButton = document.getElementsByClassName('page-header-deposit-button')[0];
         if (depositHeaderButton) {
-          depositHeaderButton.addEventListener('click', function (e) {
+          depositHeaderButton.addEventListener('mouseup', function (e) {
             var category = batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_DEPOSITO;
             batTag.sendAnalyticsEvent(category, action);
