@@ -20,7 +20,8 @@
       REGISTRO_PASO: 'registro_paso',
       REGISTRO_PASO1: 'registro_paso1',
       REGISTRO_PASO2: 'registro_paso2',
-      REGISTRO_PASO3: 'registro_paso3'
+      REGISTRO_PASO3: 'registro_paso3',
+      LOGIN: 'login'
     };
     var ACTIONS = {
       ATRAS: 'atras',
