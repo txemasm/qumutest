@@ -190,8 +190,8 @@
   }
 
   function _getUserId(userInfo) {
-    var userInfo = userInfo || window.UserInfo.current || {};
-    return userInfo.userId;
+    var userInfo = userInfo || window.UserInfo.current || window.batTag.user || {};
+    return userInfo.userId || userInfo.id;
   }
 
   function _getUserStatus(userInfo) {
