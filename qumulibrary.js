@@ -103,6 +103,12 @@
                           }
                       } else {
                           var remainder = time % 60000;
+                          if (time < 500 && !videos[videoInfo.guid].mediaBegin) {
+                            action = getAction('load');
+                            pushToDataLayer(action, label);
+                            consoleDebugger('live_load' + DEBUGGER.push + videoInfo.guid);
+                            videos[videoInfo.guid].mediaBegin = true;
+                          }
                           if (time > 500 && remainder < 180) {
                               var formattedTime = formatTime(videoInfo.currentTime);
                               action = getAction('unload', formattedTime);
