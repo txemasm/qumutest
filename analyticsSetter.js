@@ -219,7 +219,7 @@
   }
 
   function _setUserData() {
-    if (window.UserInfo.current) {
+    if (window.UserInfo) {
       var userInfo = window.UserInfo.current;
       return {
         'isLogged': _getUserLogged(userInfo),
