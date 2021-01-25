@@ -99,18 +99,31 @@
 
 
     function _addHeaderEventListeners() {
-      var headerId = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020") || document.querySelector("#hr-mid-Top_ResponsiveHeader_19160");
+      var headerId = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020") || document.querySelector("#hr-mid-Top_ResponsiveHeader_19160") || document.querySelector(".c-menu__wrapper");
+      var landing = _isLanding();
       if (headerId) {
         clearInterval(checkHeader);
         var joinNowHeaderButton, loginHeaderButton, listenerAction;
-        if (_getDeviceType() === 'mobile') {
-          joinNowHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right5");
-          loginHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
-          listenerAction = 'touchend';
+        if (!landing) {
+          if (_getDeviceType() === 'mobile') {
+            joinNowHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right5");
+            loginHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
+            listenerAction = 'touchend';
+          } else {
+            joinNowHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right1");
+            loginHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right2");
+            listenerAction = 'mouseup';
+          }
         } else {
-          joinNowHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right1");
-          loginHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right2");
-          listenerAction = 'mouseup';
+          if (_getDeviceType() === 'mobile') {
+            joinNowHeaderButton = document.querySelector(".c-menu__wrapper a[href*='registration-m']");
+            loginHeaderButton = document.querySelector(".c-menu__wrapper a[href*='sports']");
+            listenerAction = 'touchend';
+          } else {
+            joinNowHeaderButton = document.querySelector(".c-menu__wrapper a[href*='registration']");
+            loginHeaderButton = document.querySelector(".c-menu__wrapper a[href*='sports']");
+            listenerAction = 'mouseup';
+          }
         }
 
         /*JOIN NOW BUTTON*/
@@ -144,8 +157,18 @@
   }
   var checkHeader = setInterval(_addHeaderEventListeners, 1000);
 
+  function _isLanding() {
+    return window.document.title.indexOf('Bonus') > -1 ? true : false;
+  }
+
   function _getDeviceType() {
-    return window.DEVICE_TYPE === 'IsDesktop' ? 'web' : 'mobile';
+    if (window.DEVICE_TYPE) {
+      return window.DEVICE_TYPE === 'IsDesktop' ? 'web' : 'mobile';
+    } else {
+      return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 'mobile' : 'web';
+    }
+  }
+    
   }
   function _setEventData(category, action, label) {
     return {
