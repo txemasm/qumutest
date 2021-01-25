@@ -304,7 +304,7 @@
     });
   }
 
-  function sendRegistrationPageview(currentStep) {
+  function sendRegistrationPageview(currentStep, landingData) {
     var registrationPageTitle = {
       '1': PAGETITLES.DATOS_PERSONALES,
       '2': PAGETITLES.DATOS_CONTACTO,
@@ -312,8 +312,14 @@
       '4': PAGETITLES.VERIFICAR_IDENTIDAD,
       '5': PAGETITLES.CONFIRMACION
     };
-    var section = SECTIONS.USUARIO;
-    var pageType = PAGETYPES.REGISTRO;
+    var section, pageType;
+    if (landingData) {
+      section = 'landing';
+      pageType = landingData;
+    } else {
+      section = SECTIONS.USUARIO;
+      pageType = PAGETYPES.REGISTRO;
+    }
     var pageTitle = registrationPageTitle[currentStep];
 
     sendPageview(section, pageType, pageTitle);
