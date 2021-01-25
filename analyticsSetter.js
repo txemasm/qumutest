@@ -32,7 +32,6 @@
       IR_REGISTRO: 'ir_registro',
       IR_LOGIN: 'ir_login',
       IR_DEPOSITO: 'ir_deposito'
-
     };
     var LABELS = {
       PASO: 'paso',
@@ -220,19 +219,22 @@
   }
 
   function _setUserData() {
-    var userInfo = window.UserInfo.current;
-    return {
-      'isLogged': _getUserLogged(userInfo),
-      'balance': _getUserBalance(userInfo),
-      'gender': undefined,
-      'age': undefined,
-      'province': undefined,
-      'status': _getUserStatus(userInfo),
-      'id': _getUserId(userInfo),
-      'balanceEnough': undefined,
-      'coupon': undefined,
-      'openBets': undefined
+    if (window.UserInfo.current) {
+      var userInfo = window.UserInfo.current;
+      return {
+        'isLogged': _getUserLogged(userInfo),
+        'balance': _getUserBalance(userInfo),
+        'gender': undefined,
+        'age': undefined,
+        'province': undefined,
+        'status': _getUserStatus(userInfo),
+        'id': _getUserId(userInfo),
+        'balanceEnough': undefined,
+        'coupon': undefined,
+        'openBets': undefined
+      }
     }
+    return undefined;
   }
   function sendPageview(section, pageType, pageTitle) {
     window.dataLayer.push({
