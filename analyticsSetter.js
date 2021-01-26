@@ -21,7 +21,8 @@
       REGISTRO_PASO1: 'registro_paso1',
       REGISTRO_PASO2: 'registro_paso2',
       REGISTRO_PASO3: 'registro_paso3',
-      LOGIN: 'login'
+      LOGIN: 'login',
+      LANDING: 'landing'
     };
     var ACTIONS = {
       ATRAS: 'atras',
@@ -104,17 +105,7 @@
       if (headerId) {
         clearInterval(checkHeader);
         var joinNowHeaderButton, loginHeaderButton, listenerAction;
-        if (!landing) {
-          if (_getDeviceType() === 'mobile') {
-            joinNowHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right5");
-            loginHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
-            listenerAction = 'touchend';
-          } else {
-            joinNowHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right1");
-            loginHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right2");
-            listenerAction = 'mouseup';
-          }
-        } else {
+        if (landing) {
           if (_getDeviceType() === 'mobile') {
             joinNowHeaderButton = document.querySelector(".c-menu__wrapper a[href*='registration-m']");
             loginHeaderButton = document.querySelector(".c-menu__wrapper a[href*='sports']");
@@ -124,12 +115,22 @@
             loginHeaderButton = document.querySelector(".c-menu__wrapper a[href*='sports']");
             listenerAction = 'mouseup';
           }
+        } else {
+          if (_getDeviceType() === 'mobile') {
+            joinNowHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right5");
+            loginHeaderButton = document.querySelector("#hr-top-Top_ResponsiveHeader_19160-page-header-right4");
+            listenerAction = 'touchend';
+          } else {
+            joinNowHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right1");
+            loginHeaderButton = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020-page-header-right2");
+            listenerAction = 'mouseup';
+          }
         }
 
         /*JOIN NOW BUTTON*/
         if (joinNowHeaderButton) {
           joinNowHeaderButton.addEventListener(listenerAction, function (e) {
-            var category = batTag.CONSTANTS.CATEGORY.HEADER;
+            var category = landing ? batTag.CONSTANTS.CATEGORY.LANDING : batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
             batTag.sendAnalyticsEvent(category, action);
           });
@@ -138,7 +139,7 @@
         /*LOGIN BUTTON*/
         if (loginHeaderButton) {
           loginHeaderButton.addEventListener(listenerAction, function (e) {
-            var category = batTag.CONSTANTS.CATEGORY.HEADER;
+            var category = landing ? batTag.CONSTANTS.CATEGORY.LANDING : batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_LOGIN;
             batTag.sendAnalyticsEvent(category, action);
           });
@@ -315,7 +316,7 @@
     var section, pageType;
     if (landingData) {
       section = 'landing';
-      pageType = landingData;
+      pageType = landingData.replace('register', 'registrate');
     } else {
       section = SECTIONS.USUARIO;
       pageType = PAGETYPES.REGISTRO;
