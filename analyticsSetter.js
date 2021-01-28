@@ -93,12 +93,11 @@
           overwrited: true
         }
       }();
-
+      _checkLocalStorageLandingItem()
     }
     catch (e) {
       //console.log("No está definida");
     }
-
 
     function _addHeaderEventListeners() {
       var headerId = document.querySelector("#hr-mid-Top_ResponsiveHeader_16020") || document.querySelector("#hr-mid-Top_ResponsiveHeader_19160") || document.querySelector(".c-menu__wrapper");
@@ -156,218 +155,236 @@
           });
         }
       }
-  }
-  var checkHeader = setInterval(_addHeaderEventListeners, 1000);
+    }
+    var checkHeader = setInterval(_addHeaderEventListeners, 1000);
 
-  function _isLanding() {
-    return window.document.title.indexOf('Bonus') > -1 ? true : false;
-  }
-
-  function _getDeviceType() {
-    if (window.DEVICE_TYPE) {
-      return window.DEVICE_TYPE === 'IsDesktop' ? 'web' : 'mobile';
-    } else {
-      return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 'mobile' : 'web';
-    }
-  }
-  function _setEventData(category, action, label) {
-    return {
-      'category': category,
-      'action': action,
-      'label': label
-    }
-  }
-  function _setContextData() {
-    var platform = _getDeviceType();
-    return {
-      'platform': platform,
-      'country': 'mt'
-    }
-  }
-  function _setPageData(section, pageType, pageTitle) {
-    return {
-      'origin': undefined,
-      'filter': undefined,
-      'isTagged': undefined,
-      'section': section,
-      'type': pageType,
-      'pageTitle': pageTitle
-    }
-  }
-  function _setDepositData() {
-    return {
-      'isQuickdeposit': undefined,
-      'paymentType': undefined,
-      'firstDeposit': undefined
-    }
-  }
-  function _setTicketData() {
-    return {
-      'betType': undefined,
-      'amount': undefined
-    }
-  }
-  function _setEcommerce() {
-    return undefined;
-  }
-
-  function _getUserId(userInfo) {
-    var userInfo = userInfo || window.UserInfo.current || window.batTag.user || {};
-    return userInfo.userId || userInfo.id;
-  }
-
-  function _getUserStatus(userInfo) {
-    var userInfo = userInfo || window.UserInfo.current || {};
-    if (userInfo.IsSelfExcluded === 1) {
-      return 'autoexcluido';
-    }
-    if (userInfo.IsAccountVerified === 1) {
-      return 'verificado';
-    } else {
-      return 'no_verificado';
+    function _isLanding() {
+      return window.document.title.indexOf('Bonus') > -1 ? true : false;
     }
 
-  }
-
-  function _getUserLogged(userInfo) {
-    var userInfo = userInfo || window.UserInfo.current;
-    if (userInfo) {
-      return 'si'
-    }
-    return 'no';
-  }
-  function _getUserBalance(userInfo) {
-    var userInfo = userInfo || window.UserInfo.current || {};
-    return userInfo.TotalBalance;
-  }
-
-  function _setUserData() {
-    if (window.UserInfo) {
-      var userInfo = window.UserInfo.current;
-      return {
-        'isLogged': _getUserLogged(userInfo),
-        'balance': _getUserBalance(userInfo),
-        'gender': undefined,
-        'age': undefined,
-        'province': undefined,
-        'status': _getUserStatus(userInfo),
-        'id': _getUserId(userInfo),
-        'balanceEnough': undefined,
-        'coupon': undefined,
-        'openBets': undefined
+    function _getDeviceType() {
+      if (window.DEVICE_TYPE) {
+        return window.DEVICE_TYPE === 'IsDesktop' ? 'web' : 'mobile';
+      } else {
+        return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 'mobile' : 'web';
       }
     }
-    return undefined;
-  }
-  function sendPageview(section, pageType, pageTitle) {
-    window.dataLayer.push({
-      'event': 'imPageview',
-      'context': _setContextData(),
-      'user': _setUserData(),
-      'page': _setPageData(section, pageType, pageTitle),
-      'deposit': _setDepositData(),
-      'ticket': _setTicketData(),
-      'ecommerce': undefined
-    });
-  }
-  function sendEcommercePageview() {
-    window.dataLayer.push({
-      'event': 'imPageview',
-      'context': _setContextData(),
-      'user': _setUserData(),
-      'page': _setPageData(currentStep),
-      'deposit': _setDepositData(),
-      'ticket': _setTicketData(),
-      'ecommerce': _setEcommerce()
-    });
-  }
-
-  function sendAnalyticsEvent(category, action, label) {
-    window.dataLayer.push({
-      'event': 'imAnalyticsEvent',
-      'event_data': _setEventData(category, action, label),
-      'context': _setContextData(),
-      'user': _setUserData(),
-      'deposit': _setDepositData(),
-      'ticket': _setTicketData(),
-      'ecommerce': undefined
-    });
-  }
-  function sendEcommerceEvent() {
-    window.dataLayer.push({
-      'event': 'imAnalyticsEvent',
-      'event_data': _setEventData(),
-      'context': _setContextData(),
-      'user': _setUserData(),
-      'page': _setPageData(),
-      'deposit': _setDepositData(),
-      'ticket': _setTicketData(),
-      'ecommerce': _setEcommerce()
-    });
-  }
-
-  function sendRegistrationPageview(currentStep, landingData) {
-    var registrationPageTitle = {
-      '1': PAGETITLES.DATOS_PERSONALES,
-      '2': PAGETITLES.DATOS_CONTACTO,
-      '3': PAGETITLES.DATOS_ACCESO,
-      '4': PAGETITLES.VERIFICAR_IDENTIDAD,
-      '5': PAGETITLES.CONFIRMACION
-    };
-    var section, pageType;
-    if (landingData) {
-      section = 'landing';
-      pageType = landingData.replace('register', 'registrate');
-    } else {
-      section = SECTIONS.USUARIO;
-      pageType = PAGETYPES.REGISTRO;
+    
+    function _setEventData(category, action, label) {
+      return {
+        'category': category,
+        'action': action,
+        'label': label
+      }
     }
-    var pageTitle = registrationPageTitle[currentStep];
 
-    sendPageview(section, pageType, pageTitle);
-  }
-
-  function sendDepositPage() {
-    if (window.UserInfo.current) {
-      var section = SECTIONS.USUARIO;
-      var pageType = PAGETYPES.MENU_DEPOSITAR;
-      sendPageview(section, pageType);
+    function _setContextData() {
+      var platform = _getDeviceType();
+      return {
+        'platform': platform,
+        'country': 'mt'
+      }
     }
-  }
 
-  function sendErrorFormRegister(step, errorKey) {
-    var landing = localStorage.getItem("imLanding");
-    var category = landing ? CATEGORIES.LANDING_PASO + step : CATEGORIES.REGISTRO_PASO + step;
-    var action = ACTIONS.ERROR_REGISTRO;
-    var label = errorKey;
-    sendAnalyticsEvent(category, action, label);
-  }
-  var commonTracking = {
-    sendPageview: sendPageview,
-    sendAnalyticsEvent: sendAnalyticsEvent,
-    sendEcommercePageview: sendEcommercePageview,
-    sendEcommerceEvent: sendEcommerceEvent,
-    sendRegistrationPageview: sendRegistrationPageview,
-    sendErrorFormRegister: sendErrorFormRegister,
-    sendDepositPage: sendDepositPage,
-    PAGETITLE: PAGETITLES,
-    PAGETYPE: PAGETYPES,
-    SECTION: SECTIONS,
-    CONSTANTS: {
+    function _setPageData(section, pageType, pageTitle) {
+      return {
+        'origin': undefined,
+        'filter': undefined,
+        'isTagged': undefined,
+        'section': section,
+        'type': pageType,
+        'pageTitle': pageTitle
+      }
+    }
+
+    function _setDepositData() {
+      return {
+        'isQuickdeposit': undefined,
+        'paymentType': undefined,
+        'firstDeposit': undefined
+      }
+    }
+
+    function _setTicketData() {
+      return {
+        'betType': undefined,
+        'amount': undefined
+      }
+    }
+
+    function _setEcommerce() {
+      return undefined;
+    }
+
+    function _getUserId(userInfo) {
+      var userInfo = userInfo || window.UserInfo.current || window.batTag.user || {};
+      return userInfo.userId || userInfo.id;
+    }
+
+    function _getUserStatus(userInfo) {
+      var userInfo = userInfo || window.UserInfo.current || {};
+      if (userInfo.IsSelfExcluded === 1) {
+        return 'autoexcluido';
+      }
+      if (userInfo.IsAccountVerified === 1) {
+        return 'verificado';
+      } else {
+        return 'no_verificado';
+      }
+    }
+
+    function _getUserLogged(userInfo) {
+      var userInfo = userInfo || window.UserInfo.current;
+      if (userInfo) {
+        return 'si'
+      }
+      return 'no';
+    }
+
+    function _getUserBalance(userInfo) {
+      var userInfo = userInfo || window.UserInfo.current || {};
+      return userInfo.TotalBalance;
+    }
+
+    function _setUserData() {
+      if (window.UserInfo) {
+        var userInfo = window.UserInfo.current;
+        return {
+          'isLogged': _getUserLogged(userInfo),
+          'balance': _getUserBalance(userInfo),
+          'gender': undefined,
+          'age': undefined,
+          'province': undefined,
+          'status': _getUserStatus(userInfo),
+          'id': _getUserId(userInfo),
+          'balanceEnough': undefined,
+          'coupon': undefined,
+          'openBets': undefined
+        }
+      }
+      return undefined;
+    }
+
+    function _checkLocalStorageLandingItem() {
+      var landing = JSON.parse(localStorage.getItem("imLanding"));
+      var landingExpiryTime = landing ? landing.expiryTime : undefined;
+      var now = new Date().getTime();
+      if (landingExpiryTime < now) {
+        localStorage.removeItem("imLanding");
+      }
+    }
+
+    function sendPageview(section, pageType, pageTitle) {
+      window.dataLayer.push({
+        'event': 'imPageview',
+        'context': _setContextData(),
+        'user': _setUserData(),
+        'page': _setPageData(section, pageType, pageTitle),
+        'deposit': _setDepositData(),
+        'ticket': _setTicketData(),
+        'ecommerce': undefined
+      });
+    }
+
+    function sendEcommercePageview() {
+      window.dataLayer.push({
+        'event': 'imPageview',
+        'context': _setContextData(),
+        'user': _setUserData(),
+        'page': _setPageData(currentStep),
+        'deposit': _setDepositData(),
+        'ticket': _setTicketData(),
+        'ecommerce': _setEcommerce()
+      });
+    }
+
+    function sendAnalyticsEvent(category, action, label) {
+      window.dataLayer.push({
+        'event': 'imAnalyticsEvent',
+        'event_data': _setEventData(category, action, label),
+        'context': _setContextData(),
+        'user': _setUserData(),
+        'deposit': _setDepositData(),
+        'ticket': _setTicketData(),
+        'ecommerce': undefined
+      });
+    }
+
+    function sendEcommerceEvent() {
+      window.dataLayer.push({
+        'event': 'imAnalyticsEvent',
+        'event_data': _setEventData(),
+        'context': _setContextData(),
+        'user': _setUserData(),
+        'page': _setPageData(),
+        'deposit': _setDepositData(),
+        'ticket': _setTicketData(),
+        'ecommerce': _setEcommerce()
+      });
+    }
+
+    function sendRegistrationPageview(currentStep, landingData) {
+      var registrationPageTitle = {
+        '1': PAGETITLES.DATOS_PERSONALES,
+        '2': PAGETITLES.DATOS_CONTACTO,
+        '3': PAGETITLES.DATOS_ACCESO,
+        '4': PAGETITLES.VERIFICAR_IDENTIDAD,
+        '5': PAGETITLES.CONFIRMACION
+      };      
+      var section, pageType;
+      if (landingData) {
+        section = 'landing';
+        pageType = landingData.replace('register', 'registrate');
+      } else {
+        section = SECTIONS.USUARIO;
+        pageType = PAGETYPES.REGISTRO;
+      }
+      var pageTitle = registrationPageTitle[currentStep];
+
+      sendPageview(section, pageType, pageTitle);
+    }
+
+    function sendDepositPage() {
+      if (window.UserInfo.current) {
+        var section = SECTIONS.USUARIO;
+        var pageType = PAGETYPES.MENU_DEPOSITAR;
+        sendPageview(section, pageType);
+      }
+    }
+
+    function sendErrorFormRegister(step, errorKey) {
+      var landing = localStorage.getItem("imLanding");
+      var category = landing ? CATEGORIES.LANDING_PASO + step : CATEGORIES.REGISTRO_PASO + step;
+      var action = ACTIONS.ERROR_REGISTRO;
+      var label = errorKey;
+      sendAnalyticsEvent(category, action, label);
+    }
+
+    var commonTracking = {
+      sendPageview: sendPageview,
+      sendAnalyticsEvent: sendAnalyticsEvent,
+      sendEcommercePageview: sendEcommercePageview,
+      sendEcommerceEvent: sendEcommerceEvent,
+      sendRegistrationPageview: sendRegistrationPageview,
+      sendErrorFormRegister: sendErrorFormRegister,
+      sendDepositPage: sendDepositPage,
       PAGETITLE: PAGETITLES,
       PAGETYPE: PAGETYPES,
       SECTION: SECTIONS,
-      ACTION: ACTIONS,
-      CATEGORY: CATEGORIES,
-      LABEL: LABELS
-    },
-    batVersion: '1.1.0'
+      CONSTANTS: {
+        PAGETITLE: PAGETITLES,
+        PAGETYPE: PAGETYPES,
+        SECTION: SECTIONS,
+        ACTION: ACTIONS,
+        CATEGORY: CATEGORIES,
+        LABEL: LABELS
+      },
+      batVersion: '1.1.0'
+    }
+    return commonTracking;
   }
-  return commonTracking;
-}
 
   if (typeof (window.batTag) === 'undefined') {
-  window.batTag = initTracking();
-}
-
+    window.batTag = initTracking();
+  }
 }) (window);
