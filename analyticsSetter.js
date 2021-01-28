@@ -22,7 +22,8 @@
       REGISTRO_PASO2: 'registro_paso2',
       REGISTRO_PASO3: 'registro_paso3',
       LOGIN: 'login',
-      LANDING: 'landing'
+      LANDING: 'landing',
+      LANDING_PASO: 'landing_paso'
     };
     var ACTIONS = {
       ATRAS: 'atras',
@@ -335,7 +336,8 @@
   }
 
   function sendErrorFormRegister(step, errorKey) {
-    var category = CATEGORIES.REGISTRO_PASO + step;
+    var landing = localStorage.getItem("imLanding");
+    var category = landing ? CATEGORIES.LANDING_PASO + step : CATEGORIES.REGISTRO_PASO + step;
     var action = ACTIONS.ERROR_REGISTRO;
     var label = errorKey;
     sendAnalyticsEvent(category, action, label);
@@ -359,7 +361,7 @@
       CATEGORY: CATEGORIES,
       LABEL: LABELS
     },
-    batVersion: '1.0.0'
+    batVersion: '1.1.0'
   }
   return commonTracking;
 }
