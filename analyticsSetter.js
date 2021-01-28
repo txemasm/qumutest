@@ -93,7 +93,7 @@
           overwrited: true
         }
       }();
-      _checkLocalStorageLandingItem()
+      _checkLocalStorageLandingItem();
     }
     catch (e) {
       //console.log("No está definida");
@@ -169,7 +169,7 @@
         return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 'mobile' : 'web';
       }
     }
-    
+
     function _setEventData(category, action, label) {
       return {
         'category': category,
