@@ -133,7 +133,7 @@
           joinNowHeaderButton.addEventListener(listenerAction, function (e) {
             var category = landing ? batTag.CONSTANTS.CATEGORY.LANDING : batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
-            var label = landing ? batTag.CONSTANTS.LABEL.HEADER : undefined;
+            var label = landing ? batTag.CONSTANTS.LABELS.HEADER : undefined;
             batTag.sendAnalyticsEvent(category, action), label;
           });
         }
@@ -143,7 +143,7 @@
           loginHeaderButton.addEventListener(listenerAction, function (e) {
             var category = landing ? batTag.CONSTANTS.CATEGORY.LANDING : batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_LOGIN; 
-            var label = landing ? batTag.CONSTANTS.LABEL.HEADER : undefined;
+            var label = landing ? batTag.CONSTANTS.LABELS.HEADER : undefined;
             batTag.sendAnalyticsEvent(category, action), label;
           });
         }
