@@ -39,7 +39,8 @@
       PASO: 'paso',
       PASO_1: 'paso_1',
       PASO_2: 'paso_2',
-      PASO_3: 'paso_3'
+      PASO_3: 'paso_3',
+      HEADER: 'header'
     };
 
     //Se sobrescriben las funciones para adaptarlas a nuestra analítica. 
@@ -132,7 +133,8 @@
           joinNowHeaderButton.addEventListener(listenerAction, function (e) {
             var category = landing ? batTag.CONSTANTS.CATEGORY.LANDING : batTag.CONSTANTS.CATEGORY.HEADER;
             var action = batTag.CONSTANTS.ACTION.IR_REGISTRO;
-            batTag.sendAnalyticsEvent(category, action);
+            var label = landing ? batTag.CONSTANTS.LABEL.HEADER : undefined;
+            batTag.sendAnalyticsEvent(category, action), label;
           });
         }
 
@@ -140,8 +142,9 @@
         if (loginHeaderButton) {
           loginHeaderButton.addEventListener(listenerAction, function (e) {
             var category = landing ? batTag.CONSTANTS.CATEGORY.LANDING : batTag.CONSTANTS.CATEGORY.HEADER;
-            var action = batTag.CONSTANTS.ACTION.IR_LOGIN;
-            batTag.sendAnalyticsEvent(category, action);
+            var action = batTag.CONSTANTS.ACTION.IR_LOGIN; 
+            var label = landing ? batTag.CONSTANTS.LABEL.HEADER : undefined;
+            batTag.sendAnalyticsEvent(category, action), label;
           });
         }
 
