@@ -263,9 +263,11 @@
           'balanceEnough': undefined,
           'coupon': undefined,
           'openBets': undefined
-        }
+        };
       }
-      return undefined;
+      return {
+        'isLogged':'no'
+      };
     }
 
     function _checkLocalStorageLandingItem() {
